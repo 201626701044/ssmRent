@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+<title>用AJAX以JSON方式提交数据</title>  
+<script type="text/javascript" src="jquery.min.js"></script>  
+</head>  
+<body>  
+    <form >  
+       id：<input type="text" id="member_ID" value="123" /><br/>
+       名称：<input type="text" id="member_name" value="member xxx"/><br/>
+        <input type="button" value="提交" id="sender">   
+    </form>  
+    <div id="messageDiv"></div>  
+       
+    <script>  
+    $('#sender').click(function(){  
+        var member_ID=document.getElementById('member_ID').value;
+        var member_name=document.getElementById('member_name').value;
+        var member={"member_name":member_name,"member_ID":member_ID};
+        var jsonData = JSON.stringify(member);
+        var page="submitMember";
+        
+        $.ajax({
+        		type:"post",
+        	   url: page,
+        	   data:jsonData,
+               dataType:"json",
+               contentType : "application/json;charset=UTF-8",
+        	   success: function(result){
+        	   }
+        	});
+		   alert("提交成功，请在Tomcat控制台查看服务端接收到的数据");
+
+    });
+    </script>  
+</body>  
+   
+</body>
+</html>
